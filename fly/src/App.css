@@ -96,18 +96,28 @@
 .Command:hover{
   opacity: 0.8;
 }
-
 .tableClass {
-  width: 160%;
+  height:195px;
+  overflow-y: scroll;
 }
 .DialogBox {
-  margin:0.5rem;
-  --ag-grid-size: 0px;
-  --ag-list-item-height: 10px;
+  margin:2rem;
+  border-style: solid;
+  border-width: 3px;
+  border-radius:1rem;
+  border-color: #008DDA ;
 }
-.ag-theme-quartz {
-  --ag-grid-size: 5px;
-  --ag-list-item-height: 10px;
+.selected {
+  background-color: rgb(88, 223, 220);
+  color : #0479b8;
 }
-
+.row {
+  color : #0479b8;
+  justify-content: space-evenly;
+  flex-direction: row;
+  display: flex;
+  font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight:bold;
+  font-size : medium;
+}
 

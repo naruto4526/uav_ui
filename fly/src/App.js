@@ -2,9 +2,6 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import {ChartLine}  from './components/posChart';
 import { BorChart } from './components/barChart';
-import { GridExample } from './components/grid';
-import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
-import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 
 const DATA =  [
   { x: 100, y: 20, z : 100},
@@ -90,9 +87,21 @@ function App() {
       <p>Header</p>
     </div>
       <div className="App">
-      <div className = "controlBox borderClass tableClass">
-          <div className = "Commands">
-            <button className="Command" onClick = {() => {
+      <div className = "controlBox borderClass">
+          <div className = "Commands tableClass">
+            <button className={"Command" + (drone == 1 ? " selected": '')} onClick = {() => {
+              drone == 1 ? selectDrone(0) : selectDrone(1);
+            }}>Drone 1</button>
+            <button className={"Command" + (drone == 2 ? " selected": '')} onClick = {() => {
+              drone == 2 ? selectDrone(0) : selectDrone(2);
+            }}>Drone 2</button>
+            <button className={"Command" + (drone == 3 ? " selected": '')} onClick = {() => {
+              drone == 3 ? selectDrone(0) : selectDrone(3);
+            }}>Drone 3</button>
+            <button className={"Command" + (drone == 4 ? " selected": '')} onClick = {() => {
+              drone == 4 ? selectDrone(0) : selectDrone(4);
+            }}>Drone 4</button>
+            <button className={"Command" + (drone == 1 ? " selected": '')} onClick = {() => {
               drone == 1 ? selectDrone(0) : selectDrone(1);
             }}>Drone 1</button>
             <button className="Command" onClick = {() => {
@@ -105,9 +114,18 @@ function App() {
               drone == 4 ? selectDrone(0) : selectDrone(4);
             }}>Drone 4</button>
           </div>
-          <div className = "DialogBox ag-theme-quartz" style={{ height: 250 }}>
-            <GridExample/>
-          </div>
+          {(drone != 0) ? (<div className = "DialogBox" >
+            <div class = "row">
+              <p>Xpos</p>
+              <p>:</p>
+              <p>{data[drone].x}</p>
+            </div>
+            <div class = "row">
+              <p>Ypos</p>
+              <p>:</p>
+              <p>{data[drone].y}</p>
+            </div> 
+          </div>): <p></p>}
         </div>
         <div className = "graphBox borderClass">
           <div className = "dronePicker">
@@ -124,7 +142,7 @@ function App() {
         </div>
         <div className = "controlBox borderClass">
           <div className = "Commands">
-            <button className="Command" onClick = {commands(1)}>Command2</button>
+            <button className="Command" onClick = {commands(1)}>Command1</button>
             <button className="Command" onClick = {commands(2)}>Command2</button>
             <button className="Command" onClick = {commands(3)}>Command3</button>
             <button className="Command" onClick = {commands(4)}>Command4</button>
