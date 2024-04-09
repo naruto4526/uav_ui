@@ -1,0 +1,113 @@
+.App {
+  justify-content: space-around;
+  display: flex;
+}
+.header {
+  background-color: #236fba;
+  width : 100vw;
+  height:10vh;
+  margin-top:0;
+}
+.dronePicker {
+  display: flex;
+  justify-content: space-around;
+}
+.graphContainer {
+  border-color: #008DDA;
+  border-width: 0.7rem;
+  background-color: white;
+  border-style: solid;
+  display:flex; 
+  border-width:1rem;
+  padding:0.5rem;
+}
+.graph {
+  background-color: white;
+}
+.otherDrone {
+  cursor: pointer;
+  padding : 1rem;
+  color : #008DDA;
+  background-color:#a6efee;
+  border-style:none;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight:bold;
+  font-size : medium;
+  width : 40%;
+}
+.otherDrone:hover {
+  opacity:0.8;
+}
+.selectedDrone {
+  cursor: pointer;
+  background-color : #008DDA;
+  border-style : none;
+  padding : 1rem;
+  color : #ACE2E1;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight:bold;
+  font-size : medium;
+  width : 40%;
+}
+
+.graphBox {
+  width : 55vw;
+  color : white;
+}
+.borderClass {
+  margin: 0.5rem;
+  margin-top: 1rem;
+  padding:1rem;
+  border-radius: 0.5rem;
+}
+.controlBox {
+  margin-top:0.5rem;
+  width: 100%;  
+  height : 200px;
+}
+.Button p {
+  margin:0
+}
+
+.Commands { 
+  display: block;
+  padding: 1rem;
+  justify-content: center;
+  border-radius: 0.3rem;
+  background-color: #008DDA;
+}
+.Command {
+  color : #008DDA;
+  width:90%;
+  margin: 0.3rem;
+  padding: 0.6rem;
+  background-color:#a6efee;
+  border-style: none;
+  border-radius : 0.15rem;
+  font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight:bold;
+  font-size : medium;
+  cursor: pointer;
+}
+.Command:hover{
+  opacity: 0.8;
+}
+
+.tableClass {
+  width: 160%;
+}
+.DialogBox {
+  margin:0.5rem;
+  --ag-grid-size: 0px;
+  --ag-list-item-height: 10px;
+}
+.ag-theme-quartz {
+  --ag-grid-size: 5px;
+  --ag-list-item-height: 10px;
+}
+
+
