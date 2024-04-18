@@ -1,9 +1,23 @@
+:root {
+  --backGroundblue: #008DDA;
+  --bgBlue: #0a4082;
+  --backGroundBlack:  #0B0C10;
+  --grey : #C5C6C7;
+  --blue : #66FCF1;
+  --white: #ffffff;
+  /* #45A29E */
+}
+
+body {
+  scrollbar-width: thin;
+}
+
 .App {
   justify-content: space-around;
   display: flex;
 }
 .header {
-  background-color: #236fba;
+  background-color: var(--bgBlue);
   width : 100vw;
   height:10vh;
   margin-top:0;
@@ -13,7 +27,7 @@
   justify-content: space-around;
 }
 .graphContainer {
-  border-color: #008DDA;
+  border-color: var(--bgBlue);
   border-width: 0.7rem;
   background-color: white;
   border-style: solid;
@@ -27,8 +41,8 @@
 .otherDrone {
   cursor: pointer;
   padding : 1rem;
-  color : #008DDA;
-  background-color:#a6efee;
+  color : var(--bgBlue);
+  background-color:var(--blue);
   border-style:none;
   border-top-left-radius: 0.2rem;
   border-top-right-radius: 0.2rem;
@@ -42,10 +56,10 @@
 }
 .selectedDrone {
   cursor: pointer;
-  background-color : #008DDA;
+  background-color : var(--bgBlue);
   border-style : none;
   padding : 1rem;
-  color : #ACE2E1;
+  color : var(--blue);
   border-top-left-radius: 0.2rem;
   border-top-right-radius: 0.2rem;
   font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -63,6 +77,7 @@
   margin-top: 1rem;
   padding:1rem;
   border-radius: 0.5rem;
+  justify-content: center;
 }
 .controlBox {
   margin-top:0.5rem;
@@ -78,15 +93,17 @@
   padding: 1rem;
   justify-content: center;
   border-radius: 0.3rem;
-  background-color: #008DDA;
+  background-color: var(--bgBlue);
 }
 .Command {
-  color : #008DDA;
+  color : var(--bgBlue);
   width:90%;
   margin: 0.3rem;
   padding: 0.6rem;
-  background-color:#a6efee;
-  border-style: none;
+  background-color:var(--blue);
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--blue);
   border-radius : 0.15rem;
   font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight:bold;
@@ -97,27 +114,69 @@
   opacity: 0.8;
 }
 .tableClass {
-  height:195px;
+  height:250px;
   overflow-y: scroll;
 }
 .DialogBox {
   margin:2rem;
-  border-style: solid;
-  border-width: 3px;
-  border-radius:1rem;
-  border-color: #008DDA ;
+  /* border-style: solid;
+  border-width: 3px; */
+  border-radius:0.3rem;
+  border-color: var(--bgBlue);
+  background-color: var(--blue);
 }
 .selected {
-  background-color: rgb(88, 223, 220);
-  color : #0479b8;
+  background-color: var(--bgBlue);
+  color : var(--blue);
+  border-width:2px;
+  border-style : solid;
+  border-radius : 0.2rem;
+  border-color: var(--blue);
 }
 .row {
-  color : #0479b8;
+  color : var(--bgBlue);
   justify-content: space-evenly;
   flex-direction: row;
   display: flex;
   font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-weight:bold;
+  font-weight:800;
   font-size : medium;
+}
+
+.textBox {
+  margin : 1rem;
+  background-color: white;
+  border-style : none;
+  height: 25px;
+  width:80%;
+  padding:5px;
+}
+.textBox:focus {
+  background-color: white;
+  outline : none;
+}
+.textcontainer {
+  margin:1rem;
+  background-color :var(--bgBlue);
+  border-radius: 0.2rem;
+  padding:1rem;
+}
+
+.textInTextContainer {
+  color : var(--blue);
+  font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight:bold;
+}
+
+.selectAllDrones {
+  flex-direction: row;
+  display: flex;
+  justify-content: left;
+  margin-left: 0.3rem;
+}
+
+.selectDronesText {
+  margin-left: 0.2rem;
+  
 }
 

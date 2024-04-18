@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
 
 
 const ChartLine = ({data, setDialogData}) => {
@@ -17,6 +17,11 @@ const ChartLine = ({data, setDialogData}) => {
       }
       setDialogData(clickedDrone);
     }
+    const RenderLabel = ({id}) => {
+      return (
+        <p>{'Drone' + id}</p>
+      )
+    }
     return (
         <ScatterChart
           margin={{
@@ -32,8 +37,11 @@ const ChartLine = ({data, setDialogData}) => {
           <CartesianGrid />
           <XAxis type="number" dataKey="x" name="x" unit="cm" />
           <YAxis type="number" dataKey="y" name="y" unit="cm" />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Scatter name="Drone Position" data={data} fill="#8884d8" />
+          {data.map((dataItem) => {
+            return (<Scatter name="Drone Position" data={dataItem.data} fill={dataItem.color}>
+              <LabelList dataKey= "label"/>
+              </Scatter>)
+          })}
         </ScatterChart>
     );
   }
