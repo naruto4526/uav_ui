@@ -35,8 +35,8 @@ const ChartLine = ({data, setDialogData}) => {
           onClick={findDrone}
         >
           <CartesianGrid />
-          <XAxis type="number" dataKey="x" name="x" unit="cm" />
-          <YAxis type="number" dataKey="y" name="y" unit="cm" />
+          <XAxis type="number" dataKey="x" name="x" unit="cm" hide = {true}/>
+          <YAxis type="number" dataKey="y" name="y" unit="cm" hide = {true}/>
           {data.map((dataItem) => {
             return (<Scatter name="Drone Position" data={dataItem.data} fill={dataItem.color}>
               <LabelList dataKey= "label"/>

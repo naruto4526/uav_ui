@@ -29,16 +29,24 @@ setTimeout(() => {
 
 
 
-// source(like drone name or number) and destination(like drone or GND station)
-// Distance to next closest object
-// Magnetometer(NEWS)
-// Gyro orientation(tilt)
-// accleration/speed
-// Pressure
-// Temperature(on board & ambient)
-// GPS geo-location
-// How many photos taken
-// Battery charge
-// Motor(s) RPM
+// source(like drone name or number),
+// Distance to next closest object,
+// Magnetometer(NEWS),
+// Gyro orientation(tilt),
+// accleration/speed,
+// Pressure,
+// Temperature(on board & ambient),
+// GPS geo-location,
+// How many photos taken,
+// Battery charge,
+// Motor(s) RPM,
 // Current on board RTC time & time since operation(millis())
 // altitude
+
+
+//For Commands:
+//1DroneNumber,1fly or 1,2Hover or 1,3 or 1,4
+//PacketCount, DroneNo., Mode, CommandNo.
+//1:2:4,      0/1 ,  1-4, [Message]
+
+//

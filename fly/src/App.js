@@ -16,34 +16,14 @@ const sendCommand = (message) => {
 
 const DATA =  [
   {
-    data : [{ x: 100, y: 20, label: 'Drone 1'}],
+    data : [{ x: 40, y: 20, label: 'Drone 1'}],
     color : '#0a4082',
     id : 1
   },
   {
-    data : [{x: 120, y: 100, label: 'Drone 2'}],
-    color : '#0a4082',
-    id : 2
-  },
-  {
-    data : [{x: 170, y: 300, label: 'Drone 3'}],
-    color : '#0a4082',
-    id : 3
-  },
-  {
-    data : [{x: 10, y: 250, label: 'Drone 4'}],
-    color : '#0a4082',
-    id : 4
-  },
-  {
-    data : [{x: 150, y: 300, label: 'Drone 5'}],
-    color : '#0a4082',
-    id : 5
-  },
-  {
-    data : [{x: 110, y: 280, label: 'Drone 6'}],
-    color : '#0a4082',
-    id : 6
+    data : [{ x: 80, y: 40, label: ''}],
+    color : '#ffffff',
+    id : -1
   },
 ];
 const BARDATA = [
@@ -73,33 +53,19 @@ const BARDATA = [
     amt: 2181,
   }
 ];
-const commands = (commandNo, drones, PacketCount, setPacketCount) => {
+const commands = (commandNo, drones, PacketCount, setPacketCount, text) => {
   return () => {
-    let message = '';
+    if (drones.length === 0) return;
+    let message = '\n';
     message += PacketCount;
     setPacketCount(PacketCount + 1);
     message += ',' + drones.join(':') + ',';
-    message += 0 + ',';
+    message += commandNo == 4 ? 1 : 0 + ',';
     message += commandNo;
+    if (text) message += ',' + text;
+    console.log(message);
     sendCommand(message);
   }
-  // switch (commandNo) {
-  //   case 1:
-  //     return () => {
-  //       sendCommand('on')
-  //     };
-  //   case 2:
-  //     return () => {sendCommand('off')};
-  //   case 3:
-  //     return () => {
-  //       var json = `{ "foo": 1, "bar": 2, "baz": 3 }`;
-  //       var obj = JSON.parse(json);
-  //       var values = Object.values(obj);
-  //       values = values.join(',');
-  //       sendCommand(values);
-  //     }
-  //   case 4:
-  //     return () => {console.log('fourth command')};
 }
 
 function App() {
@@ -114,16 +80,23 @@ function App() {
   const [PacketCount, setPacketCount] = useState(0);
   useEffect(() => {
     socket.on("data_available", (data) => {
-      // const dataArray = data.message.split(',');
-      // const droneDataObj = {};
-      // droneDataObj.x = dataArray[0];
-      // droneDataObj.y = dataArray[1];
-      // droneDataObj.z = dataArray[2];
       setDataFromDrone(data.message);
       console.log(dataFromDrone);
     });
   }, [socket]);
-  console.log(dataFromDrone);
+  useEffect(() => {
+    setInterval(() => {
+      let tempArray = [...data];
+      const dataObj = {
+        x : 40 + (Math.random() * 10 > 5 ? 1 : -1) * Math.floor(Math.random()*10),
+        y : 20 + (Math.random() * 10 > 5 ? 1 : -1) * Math.floor(Math.random()*5),
+        label : 'Drone ' + 1
+      }
+      tempArray[0].data = [dataObj];
+      setData(tempArray);
+    }, 4000);
+  }, []);
+  // console.log(dataFromDrone);
   const findDrone = (droneId) => {
     for (let droneData of data) {
       if (droneData.id == droneId) return droneData.data[0];
@@ -135,6 +108,7 @@ function App() {
       if (drone.includes(droneData.id)) droneData.color = '#eb3449';
       else droneData.color = '#0a4082';
     }
+    data[1].color = '#ffffff';
     // for (let drone of data) {
     //   if (drone.id === droneId) drone.color = '#eb3449';
     //   else drone.color = '#0a4082';
@@ -144,7 +118,7 @@ function App() {
   return (
   <div>
     <div className= "header">
-      <p>Header</p>
+      <p className = "headerText">Raptor Swarm Ground Station</p>
     </div>
       <div className="App">
       <div className = "controlBox borderClass">
@@ -152,8 +126,8 @@ function App() {
             <div className = "selectAllDrones">
               <input type = "checkbox" onChange={(e) => {
                 if (e.target.checked) {
-                  selectDrone([1,2,3,4]);
-                  highlightOnGraph([1,2,3,4]);
+                  selectDrone([1,2,3,4, 5, 6, 7, 8]);
+                  highlightOnGraph([1,2,3,4,5, 6, 7 ,8]);
                 } else {
                   selectDrone([]);
                   highlightOnGraph([]);
@@ -201,28 +175,56 @@ function App() {
               highlightOnGraph(temp);
             }}>Drone 4</button>
             <button className={"Command" + (drone.includes(5) ? " selected": '')} onClick = {() => {
-              drone == 1 ? selectDrone(0) : selectDrone(5);
-            }}>Drone 1</button>
-            <button className="Command" onClick = {() => {
-              drone == 2 ? selectDrone(0) : selectDrone(2);
-            }}>Drone 2</button>
-            <button className="Command" onClick = {() => {
-              drone == 3 ? selectDrone(0) : selectDrone(3);
-            }}>Drone 3</button>
-            <button className="Command" onClick = {() => {
-              drone == 4 ? selectDrone(0) : selectDrone(4);
-            }}>Drone 4</button>
+              let temp;
+              temp = [...drone];
+              if (drone.includes(5)) {
+                temp = [...drone];
+                temp.splice(temp.indexOf(5), 1);
+              } else temp.push(5);
+              selectDrone(temp);
+              highlightOnGraph(temp);
+            }}>Drone 5</button>
+            <button className={"Command" + (drone.includes(6) ? " selected": '')} onClick = {() => {
+              let temp;
+              temp = [...drone];
+              if (drone.includes(6)) {
+                temp = [...drone];
+                temp.splice(temp.indexOf(6), 1);
+              } else temp.push(6);
+              selectDrone(temp);
+              highlightOnGraph(temp);
+            }}>Drone 6</button>
+            <button className={"Command" + (drone.includes(7) ? " selected": '')} onClick = {() => {
+              let temp;
+              temp = [...drone];
+              if (drone.includes(7)) {
+                temp = [...drone];
+                temp.splice(temp.indexOf(7), 1);
+              } else temp.push(7);
+              selectDrone(temp);
+              highlightOnGraph(temp);
+            }}>Drone 7</button>
+            <button className={"Command" + (drone.includes(8) ? " selected": '')} onClick = {() => {
+              let temp;
+              temp = [...drone];
+              if (drone.includes(8)) {
+                temp = [...drone];
+                temp.splice(temp.indexOf(4), 1);
+              } else temp.push(8);
+              selectDrone(temp);
+              highlightOnGraph(temp);
+            }}>Drone 8</button>
           </div>
           {(drone.length == 1) ? (<div className = "DialogBox" >
             <div class = "row">
               <p>Xpos</p>
               <p>:</p>
-              <p>{findDrone(drone[0]).x}</p>
+              <p>{findDrone(drone[0])?.x}</p>
             </div>
             <div class = "row">
               <p>Ypos</p>
               <p>:</p>
-              <p>{findDrone(drone[0]).y}</p>
+              <p>{findDrone(drone[0])?.y}</p>
             </div> 
           </div>): <p></p>}
         </div>
@@ -241,20 +243,19 @@ function App() {
         </div>
         <div className = "controlBox borderClass">
           <div className = "Commands">
-            <button className="Command" onClick = {commands(1, drone, PacketCount, setPacketCount)}>Command1</button>
-            <button className="Command" onClick = {commands(2, drone, PacketCount, setPacketCount)}>Command2</button>
-            <button className="Command" onClick = {commands(3, drone, PacketCount, setPacketCount)}>Command3</button>
+            <button className="Command" onClick = {commands(1, drone, PacketCount, setPacketCount)}>Take Off</button>
+            <button className="Command" onClick = {commands(2, drone, PacketCount, setPacketCount)}>Hover</button>
+            <button className="Command" onClick = {commands(3, drone, PacketCount, setPacketCount)}>Land</button>
             <button className= {"Command" + (sendMessage ? " selected": '')} onClick = {() => {
               setSendMessage(!sendMessage);
             }}>Send Message</button>
           </div>
           {sendMessage ? (<div className='textcontainer'>
             <p className = 'textInTextContainer'>Type in message to send: </p>
-            <input type = "text" className='textBox' onChange = {(text) => setText(text.target.value)} onKeyDown={(e) => {
+            <input type = "text" value = {text} className='textBox' onChange = {(text) => setText(text.target.value)} onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                console.log("wors");
-                console.log(text);
-                sendCommand(text);
+                commands(4, drone, PacketCount, setPacketCount, text)();
+                setText('');
               }
             }}/>
           </div>) : <p></p>}
